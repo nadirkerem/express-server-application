@@ -2,7 +2,7 @@
 
 ## Overview
 
-Developed as part of the Per Scholas Software Engineering Program, this repository contains an Express application for managing tasks. It provides functionalities to view, add, edit, and delete tasks through a user-friendly web interface.
+Developed as part of the Per Scholas Software Engineering Program, this repository features an Express application primarily serving as a RESTful API for task management. It includes endpoints for managing tasks, users, and comments. Additionally, the application provides a basic web interface for listing all tasks and adding new tasks, showcasing practical use of Pug as a template engine.
 
 ## Features
 
