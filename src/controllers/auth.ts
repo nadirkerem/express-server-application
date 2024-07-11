@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { User } from '../interfaces/user';
 import { CustomError } from '../interfaces/custom-error';
 
-let users: User[] = [];
+export let users: User[] = [];
 let currentUserId = 1;
 
 export const register = (req: Request, res: Response, next: NextFunction) => {
