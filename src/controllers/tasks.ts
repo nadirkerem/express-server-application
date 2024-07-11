@@ -101,7 +101,7 @@ export const createTask = (
 
   newTask.id = currentId++;
   tasks.push(newTask);
-  res.status(201).json({ message: 'Task created', task: newTask });
+  res.status(201).redirect('/api/tasks');
 };
 
 export const updateTask = (req: Request, res: Response, next: NextFunction) => {
