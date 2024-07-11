@@ -15,6 +15,35 @@ export const getTasks = (
   res.json(tasks);
 };
 
+export const getTasksById = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const { id } = req.params;
+  const task = tasks.find((t) => t.id === parseInt(id));
+  if (!task) {
+    next({ status: 404, message: 'Task not found' });
+    return;
+  }
+  res.json(task);
+};
+
+export const getTasksByUserId = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const { userId } = req.params;
+  const userTasks = tasks.filter((t) => t.userId === parseInt(userId));
+  if (userTasks.length === 0) {
+    next({ status: 404, message: 'No tasks found' });
+    return;
+  }
+  res.json(userTasks);
+};
+
+// TODO: with userId
 export const createTask = (
   req: Request,
   res: Response,
@@ -22,7 +51,12 @@ export const createTask = (
 ): void => {
   let newTask: Task = req.body;
 
-  if (!newTask.title || !newTask.description || !newTask.deadline) {
+  if (
+    !newTask.userId ||
+    !newTask.title ||
+    !newTask.description ||
+    !newTask.deadline
+  ) {
     next({
       status: 400,
       message: 'Please include a title, description, and deadline for the task',
@@ -43,11 +77,9 @@ export const updateTask = (req: Request, res: Response, next: NextFunction) => {
     return;
   }
 
-  const { title, description, deadline } = req.body;
-
-  task.title = title || task.title;
-  task.description = description || task.description;
-  task.deadline = deadline || task.deadline;
+  task.title = req.body.title || task.title;
+  task.description = req.body.description || task.description;
+  task.deadline = req.body.deadline || task.deadline;
   res.json({ message: 'Task updated', task });
 };
 
