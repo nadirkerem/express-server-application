@@ -12,7 +12,28 @@ export const getTasks = (
   if (tasks.length === 0) {
     next({ status: 404, message: 'No tasks found' });
   }
-  res.json(tasks);
+
+  let filteredTasks = tasks;
+
+  const { title, description, deadline } = req.query;
+
+  if (title) {
+    filteredTasks = filteredTasks.filter((t) =>
+      t.title.includes(title.toString())
+    );
+  }
+
+  if (description) {
+    filteredTasks = filteredTasks.filter((t) =>
+      t.description.includes(description.toString())
+    );
+  }
+
+  if (deadline) {
+    filteredTasks = filteredTasks.filter((t) => t.deadline === deadline);
+  }
+
+  res.json(filteredTasks);
 };
 
 export const getTasksById = (
@@ -59,7 +80,8 @@ export const createTask = (
   ) {
     next({
       status: 400,
-      message: 'Please include a title, description, and deadline for the task',
+      message:
+        'Please include a user ID, title, description, and deadline for the task',
     });
     return;
   }
