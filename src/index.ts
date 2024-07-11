@@ -8,6 +8,7 @@ import tasksRoutes from './routes/tasks';
 import usersRoutes from './routes/users';
 
 import errorHandler from './middleware/error-handler';
+import { timeLogger } from './middleware/time-logger';
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(timeLogger);
 app.use(morgan('dev'));
 
 app.set('views', path.join(__dirname, 'views'));
