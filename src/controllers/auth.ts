@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { User } from '../interfaces/user';
-import { CustomError } from '../interfaces/custom-error';
 
 export let users: User[] = [];
 let currentUserId = 1;

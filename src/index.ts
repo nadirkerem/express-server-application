@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
 import tasksRoutes from './routes/tasks';
 import usersRoutes from './routes/users';
+import commentsRoutes from './routes/comments';
 
 import errorHandler from './middleware/error-handler';
 import { timeLogger } from './middleware/time-logger';
@@ -28,6 +29,7 @@ app.set('view engine', 'pug');
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', tasksRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/comments', commentsRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.render('index', { title: 'Task Management System' });
