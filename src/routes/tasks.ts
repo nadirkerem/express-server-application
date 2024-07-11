@@ -4,14 +4,16 @@ import {
   createTask,
   updateTask,
   deleteTask,
-  getTasksById,
+  getTaskById,
   getTasksByUserId,
+  getTaskForm,
 } from '../controllers/tasks';
 
 const router = Router();
 
 router.get('/', getTasks);
-router.get('/:id', getTasksById);
+router.get('/new', getTaskForm);
+router.get('/:id', getTaskById);
 router.get('/user/:user_id', getTasksByUserId);
 router.post('/', createTask);
 router.put('/:id', updateTask);

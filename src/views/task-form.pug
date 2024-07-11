@@ -1,0 +1,24 @@
+// src/views/task-form.pug
+doctype html
+html
+  head
+    title Add Task
+  body
+    h1 Add a New Task
+
+    form(action='/api/tasks' method='POST')
+      div
+        label(for='userId') User ID:
+        input(type='text' name='userId' id='userId' required)
+      div
+        label(for='title') Title:
+        input(type='text' name='title' id='title' required)
+      div
+        label(for='description') Description:
+        textarea(name='description' id='description' required)
+      div
+        label(for='deadline') Deadline:
+        input(type='date' name='deadline' id='deadline' required)
+      button(type='submit') Add Task
+
+    a(href='/api/tasks') Back to Tasks

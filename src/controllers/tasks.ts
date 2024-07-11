@@ -10,7 +10,12 @@ export const getTasks = (
   next: NextFunction
 ): void => {
   if (tasks.length === 0) {
-    next({ status: 404, message: 'No tasks found' });
+    res.render('tasks', {
+      tasks: null,
+      task: null,
+      message: 'Tasks not found',
+    });
+    return;
   }
 
   let filteredTasks = tasks;
@@ -33,10 +38,19 @@ export const getTasks = (
     filteredTasks = filteredTasks.filter((t) => t.deadline === deadline);
   }
 
-  res.json(filteredTasks);
+  // res.json(filteredTasks);
+  res.render('tasks', { tasks: filteredTasks, task: null });
 };
 
-export const getTasksById = (
+export const getTaskForm = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  res.render('task-form');
+};
+
+export const getTaskById = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -64,7 +78,6 @@ export const getTasksByUserId = (
   res.json(userTasks);
 };
 
-// TODO: with userId
 export const createTask = (
   req: Request,
   res: Response,

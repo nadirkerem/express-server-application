@@ -1,0 +1,19 @@
+// src/views/tasks.pug
+doctype html
+html
+  head
+    title Task Management
+  body
+    h1 Task Management System
+
+    h2 All Tasks
+    if message 
+      p= message
+    if tasks
+      each task in tasks
+        div
+          h3= task.title
+          p Description: #{task.description}
+          p Deadline: #{task.deadline}
+
+    a(href='/api/tasks/new') Add a New Task
